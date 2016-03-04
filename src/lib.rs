@@ -1,7 +1,7 @@
 use std::marker::PhantomData;
 
 extern crate xplm;
-use xplm::data::{Shared, Readable, ArrayWriteable, DataAccess, SearchError, ReadWrite};
+use xplm::data::{Shared, Readable, ArrayWriteable, SearchError, ReadWrite};
 
 extern crate serde;
 use serde::ser::Serialize;
@@ -12,18 +12,18 @@ extern crate serde_json;
 ///
 /// A shared object that multiple plugins can access
 ///
-pub struct SharedObject<T, A> {
+pub struct SharedObject<T> {
     /// The dataref that stores the information
-    data: Shared<Vec<u8>, A>,
+    data: Shared<Vec<u8>, ReadWrite>,
     /// Phantom data that stores T
     phantom: PhantomData<T>,
 }
 
-impl<T, A> SharedObject<T, A> where T: Serialize + Deserialize, A: DataAccess {
+impl<T> SharedObject<T> where T: Serialize + Deserialize {
     ///
     /// Finds or creates a shared object with the provided name
     ///
-    pub fn find(name: &str) -> Result<SharedObject<T, A>, SearchError> {
+    pub fn find(name: &str) -> Result<SharedObject<T>, SearchError> {
         let dataref = try!(Shared::find(name));
 
         Ok(SharedObject {
@@ -39,9 +39,6 @@ impl<T, A> SharedObject<T, A> where T: Serialize + Deserialize, A: DataAccess {
         let result = try!(serde_json::de::from_slice(&self.data.get()));
         Ok(result)
     }
-}
-
-impl<T> SharedObject<T, ReadWrite> where T: Serialize + Deserialize {
     ///
     /// Writes this shared object
     ///
