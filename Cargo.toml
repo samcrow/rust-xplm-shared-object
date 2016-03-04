@@ -1,0 +1,13 @@
+[package]
+name = "xplm-shared-object"
+version = "0.1.0"
+authors = ["Sam Crow <samcrow@uw.edu>"]
+license = "MIT/Apache-2.0"
+repository = "https://github.com/samcrow/rust-xplm-shared-object"
+keywords = ["X-Plane", "plugin"]
+description = "Inter-plugin shared data for X-Plane plugins"
+
+[dependencies]
+xplm = "0.1"
+serde="0.7"
+serde_json = "0.7"
