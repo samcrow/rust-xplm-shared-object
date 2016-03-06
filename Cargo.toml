@@ -8,6 +8,6 @@ keywords = ["X-Plane", "plugin"]
 description = "Inter-plugin shared data for X-Plane plugins"
 
 [dependencies]
-xplm = "0.1"
-serde="0.7"
+xplm = { git = "https://github.com/samcrow/rust-xplm.git" }
+serde = "0.7"
 serde_json = "0.7"
