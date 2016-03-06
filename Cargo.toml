@@ -1,5 +1,5 @@
 [package]
-name = "xplm-shared-object"
+name = "xplm_shared_object"
 version = "0.1.0"
 authors = ["Sam Crow <samcrow@uw.edu>"]
 license = "MIT/Apache-2.0"
